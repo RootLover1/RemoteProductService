@@ -8,7 +8,6 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 @SpringBootApplication
 //@ComponentScan( basePackages = { "com.example.productService" } )
 public class ProductServiceApplication {
-
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ProductServiceApplication.class, args);

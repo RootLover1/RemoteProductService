@@ -74,7 +74,9 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.example.productService.dto.ProductRequest;
+import com.example.productService.repo.ProductRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.Assertions;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -85,6 +87,9 @@ class ProductServiceApplicationTests {
 
     @Autowired
     private ObjectMapper objectMapper;    
+    @Autowired
+    private ProductRepository productRepository;
+    
 
     @Test
     void shouldCreateProduct() throws Exception {
@@ -98,7 +103,8 @@ class ProductServiceApplicationTests {
         mockMvc.perform(MockMvcRequestBuilders.post("/api/products")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(productRequestString))
-                .andExpect(status().isCreated()); // Expect HTTP 201 Created status
+                .andExpect(status().isCreated());
+                Assertions.assertEquals(1, productRepository.findAll().size()); // Expect HTTP 201 Created status
     }
 
     private ProductRequest getProductRequest() {
